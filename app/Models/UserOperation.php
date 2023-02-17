@@ -9,8 +9,8 @@ class UserOperation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'ID_user',
-        'ID_fund',
+        'id_user',
+        'id_fund',
         'amount',
         'currency',
         'amount_eur',

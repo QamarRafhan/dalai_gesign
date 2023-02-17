@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\FundmanagementImport;
 use App\Imports\UsersOperationImport;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -262,7 +263,17 @@ class UserController extends Controller
     {
         Excel::import(new UsersOperationImport, $request->file);
         
-        return redirect()->route('users.useroprations')->with('success', 'UserOprations Imported Successfully');
+        return redirect()->route('users.useroperation')->with('success', 'UserOprations Imported Successfully');
+    }
+
+    public function importFundmanagment(){
+        return view('funds.fundmanagement');
+    }
+
+    public function uploadFundmanagment(Request $request){
+        Excel::import(new FundmanagementImport, $request->file);
+        
+        return redirect()->route('users.fundmanagment')->with('success', 'UserOprations Imported Successfully');
     }
     public function export() 
     {

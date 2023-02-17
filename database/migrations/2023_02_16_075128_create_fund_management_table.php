@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('fund_management', function (Blueprint $table) {
             $table->id();
-            $table->integer('ID_fund')->nullable();
+            $table->integer('id_fund')->nullable();
             $table->dateTime('date')->nullable();
             $table->string('source')->default(0);
             $table->float('value')->nullable();

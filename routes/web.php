@@ -50,6 +50,8 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function(){
   
     Route::get('/import-useroperation', [UserController::class, 'importUserOprations'])->name('useroperation');
     Route::post('/upload-useroperation', [UserController::class, 'uploadUserOperations'])->name('upload_useroperation');
+    Route::get('/import-fundmanagment', [UserController::class, 'importFundmanagment'])->name('fundmanagment');
+    Route::post('/upload-fundmanagment', [UserController::class, 'uploadFundmanagment'])->name('upload_fundmanagment');
 
     
     Route::get('/import-users', [UserController::class, 'importUsers'])->name('import');

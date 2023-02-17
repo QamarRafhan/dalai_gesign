@@ -91,6 +91,7 @@
                     <h6 class="collapse-header">Funds</h6>
                     <a class="collapse-item" href="">Funds List</a>
                     <a class="collapse-item" href="{{route('fundcreate')}}">Add New</a>
+                    <a class="collapse-item" href="{{route('users.fundmanagment')}}">Import Fund Management</a>
                 </div>
             </div>
         </li>

@@ -3,9 +3,11 @@
 namespace App\Imports;
 
 use App\Models\UserOperation;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class UsersOperationImport implements ToModel
+class UsersOperationImport implements ToModel , WithHeadingRow
 {
     /**
     * @param array $row
@@ -14,22 +16,24 @@ class UsersOperationImport implements ToModel
     */
     public function model(array $row)
     {
-        $user = new UserOperation([
-            "ID_user" => $row['ID_user'],
-            "ID_fund" => $row['ID_fund'],
+        $useroperation = new UserOperation([
+            "id_user" => $row['id_user'],
+            "id_fund" => $row['id_fund'],
             "amount" => $row['amount'],
             "currency" => $row['currency'],
-            "role_id" => 2, // User Type User
-            "status" => 1,
-            "password" => Hash::make('password')
+            "amount_eur" =>$row['amount_eur'], 
+            "amount_tokens" =>$row['amount_tokens'], 
+            "date_unblock" =>$row['date_unblock'],
+            "status" =>$row['status'],
+            "comments" =>$row['comments'],
         ]);
 
         // Delete Any Existing Role
-        DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+       
             
         // Assign Role To User
-        $user->assignRole($user->role_id);
 
-        return $user;
+
+        return $useroperation;
     }
 }
