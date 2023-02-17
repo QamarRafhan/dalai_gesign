@@ -7,17 +7,23 @@ use Illuminate\Http\Request;
 
 class FundController extends Controller
 {
+    protected $casts = [
+        'fname'=>'array'
+    ];
     public function index()
     {
-        $funds=Fund::all()->paginate(10);
+        $funds=Fund::with('fundsManagement')->paginate(10);
         return view('funds.index',['funds' => $funds]);
     }
     public function create()
     {
         return view('funds.fundcreate');
     }
-    public function save(Request $request)
+    public function store(Request $request)
     {
-        return view('funds.fundcreate');
+        $fname=new Fund;
+        $fname=$request->name;
+        $fname->save();
+        return redirect()->route('fundcreate')->with('success','Fund Created Successfully.');
     }
 }

@@ -15,4 +15,5 @@ class FundManagement extends Model
             "currency", 
             "value_eur", 
     ];    
+   
 }

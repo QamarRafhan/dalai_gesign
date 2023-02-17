@@ -60,7 +60,9 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function(){
     Route::get('export/', [UserController::class, 'export'])->name('export');
 
 });
+    Route::get('/funds-list',[FundController::class ,'index'])->name('fundlist');
     Route::get('/funds-create',[FundController::class ,'create'])->name('fundcreate');
+    Route::post('/funds-save',[FundController::class ,'store'])->name('fundsave');
 // Route::group(['middleware' => ['role:']], function () {
 //     //
 // });

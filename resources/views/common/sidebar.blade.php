@@ -89,7 +89,7 @@
             <div id="collapsefunds" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Funds</h6>
-                    <a class="collapse-item" href="">Funds List</a>
+                    <a class="collapse-item" href="{{route('fundlist')}}">Funds List</a>
                     <a class="collapse-item" href="{{route('fundcreate')}}">Add New</a>
                     <a class="collapse-item" href="{{route('users.fundmanagment')}}">Import Fund Management</a>
                 </div>

@@ -11,4 +11,8 @@ class Fund extends Model
     protected $fillable = [
         'name',
     ];
+    public function fundsManagement()
+    {
+         return $this->hasMany('App\Models\FundManagement','id_fund');
+    }
 }
