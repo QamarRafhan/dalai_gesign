@@ -35,16 +35,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">All Funds</h6>
                     </div>
                     <div class="col-4">
-                        @hasrole('Admin')
-                        <div class="row">
-                            <div class="col-6">
-                             <button class="btn btn-sm btn-primary w-100" href="">Agents</button>
-                            </div>
-                            <div class="col-6">
-                             <button class="btn btn-sm btn-primary w-100" href="">Clients</button>
-                            </div>
-                        </div>
-                        @endhasrole
+                    
                     </div>
                 </div>
                
@@ -60,6 +51,7 @@
                                 <th width="15%">Value</th>
                                 <th width="15%">Currency</th>
                                 <th width="15%">Value_Eur</th>
+                                <th width="15%">Action</th>
                              
                             </tr>
                         </thead>
@@ -71,34 +63,16 @@
                                     <td>{{ $fund->value }}</td>
                                     <td>{{ $fund->currency }}</td>
                                     <td>{{$fund->value_eur}}</td>
-                                    <!-- @if(auth()->user()->hasAnyPermission(['user-edit','user-edit']))
                                     <td style="display: flex">
-                                    @can('user-edit')
-                                        @if ($fund->status == 0)
-                                            <a href="{{ route('users.status', ['user_id' => $fund->id, 'status' => 1]) }}"
-                                                class="btn btn-success m-2">
-                                                <i class="fa fa-check"></i>
-                                            </a>
-                                        @elseif ($fund->status == 1)
-                                            <a href="{{ route('users.status', ['user_id' => $fund->id, 'status' => 0]) }}"
-                                                class="btn btn-danger m-2">
-                                                <i class="fa fa-ban"></i>
-                                            </a>
-                                        @endif
-                                        @endcan
-                                        @can('user-edit')
-                                        <a href="{{ route('users.edit', ['user' => $fund->id]) }}"
+                                  
+                                        <a href="{{route('editfund',['id' => $fund->id])}}"
                                             class="btn btn-primary m-2">
                                             <i class="fa fa-pen"></i>
                                         </a>
-                                        @endcan
-                                        @can('user-delete')
-                                        <a class="btn btn-danger m-2" href="#" data-toggle="modal" data-target="#deleteModal">
+                                        <a class="btn btn-danger m-2" href="{{route('deletefund',['id' => $fund->id])}}" >
                                             <i class="fas fa-trash"></i>
                                         </a>
-                                        @endcan
                                     </td>
-                                    @endif -->
                                 </tr>
                             @endforeach
                         </tbody>

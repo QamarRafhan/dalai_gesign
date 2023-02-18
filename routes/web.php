@@ -63,6 +63,9 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function(){
     Route::get('/funds-list',[FundController::class ,'index'])->name('fundlist');
     Route::get('/funds-create',[FundController::class ,'create'])->name('fundcreate');
     Route::post('/funds-save',[FundController::class ,'store'])->name('fundsave');
+    Route::get('/editfunds/{id}', [FundController::class, 'edit'])->name('editfund');
+    Route::get('/deletefunds/{id}', [FundController::class, 'delete'])->name('deletefund');
+    Route::post('/updatefunds/{id}', [FundController::class, 'update'])->name('updatefund');
 // Route::group(['middleware' => ['role:']], function () {
 //     //
 // });
