@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FundController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -47,6 +48,8 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function(){
     Route::put('/update/{user}', [UserController::class, 'update'])->name('update');
     Route::delete('/delete/{user}', [UserController::class, 'delete'])->name('destroy');
     Route::get('/update/status/{user_id}/{status}', [UserController::class, 'updateStatus'])->name('status');
+
+
   
     Route::get('/import-useroperation', [UserController::class, 'importUserOprations'])->name('useroperation');
     Route::post('/upload-useroperation', [UserController::class, 'uploadUserOperations'])->name('upload_useroperation');
@@ -69,3 +72,7 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function(){
 // Route::group(['middleware' => ['role:']], function () {
 //     //
 // });
+    Route::get('/Report-create',[ReportController::class ,'create'])->name('reportcreate');
+    Route::post('/Report-save',[ReportController::class ,'store'])->name('reportsave');
+
+    Route::get('/requests', [ReportController::class, 'allrequests'])->name('allrequests');

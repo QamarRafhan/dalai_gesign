@@ -19,4 +19,8 @@ class UserOperation extends Model
         'status',
         'comments',
     ];
+    public function user()
+    {
+         return $this->belongsTo('App\Models\User','id');
+    }
 }

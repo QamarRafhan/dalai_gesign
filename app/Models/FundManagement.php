@@ -15,5 +15,12 @@ class FundManagement extends Model
             "currency", 
             "value_eur", 
     ];    
-   
+    public function alloperations()
+    {
+         return $this->hasMany('App\Models\useroperation','id_fund');
+    }
+    public function user()
+    {
+         return $this->belongsTo('App\Models\User','id');
+    }
 }

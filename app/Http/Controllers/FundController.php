@@ -13,7 +13,9 @@ class FundController extends Controller
     ];
     public function index()
     {
-        $funds=Fund::join('fund_management','fund_management.id_fund' ,'=','funds.id')->paginate(10);
+        // $funds=Fund::with('fundsManagement')->paginate(10);
+        // dd($funds);
+        $funds=Fund::join('fund_management','fund_management.id_fund' ,'=','funds.id')->paginate(5);
       
         return view('funds.index',['funds' => $funds]);
     }

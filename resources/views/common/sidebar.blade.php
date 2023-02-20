@@ -40,6 +40,7 @@
                 <a class="collapse-item" href="{{ route('users.index') }}">List</a>
                 <a class="collapse-item" href="{{ route('users.create') }}">Add New</a>
                 <a class="collapse-item" href="{{ route('users.import') }}">Import Data</a>
+                <a class="collapse-item" href="{{ route('allrequests') }}">Requests</a>
                 <a class="collapse-item" href="{{ route('users.useroperation') }}">Import UserOperation</a>
             </div>
         </div>
@@ -112,6 +113,7 @@
             <div id="collapseReport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Reports</h6>
+                    <a class="collapse-item" href="{{route('reportcreate')}}">Add New</a>
                     <a class="collapse-item" href="">Reports List</a>
                     <!-- <a class="collapse-item" href="">Add New</a> -->
                 </div>
