@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 // Profile Routes
 Route::prefix('profile')->name('profile.')->middleware('auth')->group(function () {
@@ -39,9 +39,18 @@ Route::resource('roles', App\Http\Controllers\RolesController::class);
 // Permissions
 Route::resource('permissions', App\Http\Controllers\PermissionsController::class);
 
+Route::middleware('auth')->prefix('users')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+
+
+// Route::fallback(function () {
+//     return redirect('/');
+// });
 // Users 
 Route::middleware('auth')->prefix('users')->name('users.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
+
     Route::get('/create', [UserController::class, 'create'])->name('create');
     Route::post('/store', [UserController::class, 'store'])->name('store');
     Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
@@ -63,7 +72,7 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function () {
 });
 Route::get('/funds-list', [FundController::class, 'index'])->name('fundlist');
 Route::get('/funds-create', [FundController::class, 'create'])->name('fundcreate');
-Route::post('/funds-save', [FundController::class, 'store'])->name('fundsave');
+
 Route::get('/editfunds/{id}', [FundController::class, 'edit'])->name('editfund');
 Route::get('/deletefunds/{id}', [FundController::class, 'delete'])->name('deletefund');
 Route::post('/updatefunds/{id}', [FundController::class, 'update'])->name('updatefund');
@@ -71,7 +80,7 @@ Route::post('/updatefunds/{id}', [FundController::class, 'update'])->name('updat
 
 Route::resource('funds', FundController::class);
 Route::get('/funds/import', [FundController::class, 'importFundmanagment'])->name('fundmanagment');
-Route::post('/funds/store', [UserController::class, 'uploadFundmanagment'])->name('upload_fundmanagment');
+Route::post('/funds/import_store', [UserController::class, 'uploadFundmanagment'])->name('upload_fundmanagment');
 
 
 Route::get('/Report-create', [ReportController::class, 'create'])->name('reportcreate');
