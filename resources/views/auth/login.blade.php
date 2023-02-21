@@ -22,7 +22,7 @@
                             </div>
 
                             @if (session('error'))
-                                <span class="text-danger"> {{ session('error') }}</span>
+                            <span class="text-danger"> {{ session('error') }}</span>
                             @endif
 
                             <form method="POST" action="{{ route('login') }}">
@@ -30,19 +30,19 @@
                                 <div class="form-group">
                                     <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Address.">
 
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
 
                                     @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
@@ -59,6 +59,11 @@
                             </form>
                             <hr>
                             <div class="text-center">
+                                <a class="small" href="{{route('register')}}">Register</a>
+
+                            </div>
+                            <div class="text-center">
+
                                 <a class="small" href="{{route('password.request')}}">Forgot Password?</a>
                             </div>
                         </div>
@@ -67,7 +72,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="text-center mt-5">
         <h6 class="text-white">Developed By : <a class="text-white" href="https://techtoolindia.com">TechTool India</a></h6>
     </div>

@@ -31,7 +31,7 @@ class HomeController extends Controller
     {
 
         $request_opened = UserRequest::where(['ID_user' => $request->user()->id, 'status' => 0])->count();
-        return view('home', compact('request_opened'));
+        return view('home', ['request_opened' => $request_opened, 'user' => $request->user()]);
     }
 
     /**
@@ -58,9 +58,15 @@ class HomeController extends Controller
             'first_name'    => 'required',
             'last_name'     => 'required',
             'mobile_number' => 'required|numeric|digits:10',
+            'address'      =>  'required',
+            'city'      =>  'required',
+            'cp'      =>  'required',
+            'country'      =>  'required',
+
         ]);
 
         try {
+
             DB::beginTransaction();
 
             #Update Profile Data
@@ -68,6 +74,11 @@ class HomeController extends Controller
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'mobile_number' => $request->mobile_number,
+                'address' => $request->address,
+                'city' => $request->city,
+                'cp' => $request->cp,
+                'country' => $request->country,
+                'dni' => $request->dni,
             ]);
 
             #Commit Transaction

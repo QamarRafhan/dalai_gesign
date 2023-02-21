@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-university"></i>
         </div>
@@ -29,8 +29,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown"
-            aria-expanded="true" aria-controls="taTpDropDown">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown" aria-expanded="true" aria-controls="taTpDropDown">
             <i class="fas fa-user-alt"></i>
             <span>User Management</span>
         </a>
@@ -51,77 +50,74 @@
     @endhasanyrole
 
     @hasrole('Admin')
-        <!-- Heading -->
-        <div class="sidebar-heading">
+    <!-- Heading -->
+    <div class="sidebar-heading">
         Role & Permissions
-        </div>
+    </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Masters</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Role & Permissions</h6>
-                    <a class="collapse-item" href="{{ route('roles.index') }}">Roles</a>
-                    <a class="collapse-item" href="{{ route('permissions.index') }}">Permissions</a>
-                </div>
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Masters</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Role & Permissions</h6>
+                <a class="collapse-item" href="{{ route('roles.index') }}">Roles</a>
+                <a class="collapse-item" href="{{ route('permissions.index') }}">Permissions</a>
             </div>
-        </li>
+        </div>
+    </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
     @endhasrole
-        <!-- Heading -->
-        <div class="sidebar-heading">
-          Funds
-        </div>
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Funds
+    </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefunds"
-                aria-expanded="true" aria-controls="collapsefunds">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Funds</span>
-            </a>
-            <div id="collapsefunds" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Funds</h6>
-                    <a class="collapse-item" href="{{route('funds.index')}}">Funds List</a>
-                    <a class="collapse-item" href="{{route('funds.create')}}">Add New</a>
-                    <a class="collapse-item" href="{{route('fundmanagment')}}">Import Fund Management</a>
-                </div>
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefunds" aria-expanded="true" aria-controls="collapsefunds">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Funds</span>
+        </a>
+        <div id="collapsefunds" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Funds</h6>
+                <a class="collapse-item" href="{{route('funds.index')}}">Funds List</a>
+                <a class="collapse-item" href="{{route('funds.create')}}">Add New</a>
+                <a class="collapse-item" href="{{route('fundmanagment')}}">Import Fund Management</a>
             </div>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-        <div class="sidebar-heading">
-          Reports
         </div>
+    </li>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport"
-                aria-expanded="true" aria-controls="collapseReport">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Reports</span>
-            </a>
-            <div id="collapseReport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Reports</h6>
-                    <a class="collapse-item" href="{{route('reportcreate')}}">Add New</a>
-                    <a class="collapse-item" href="{{route('reportcreate')}}">Reports List</a>
-                    <!-- <a class="collapse-item" href="">Add New</a> -->
-                </div>
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+    <div class="sidebar-heading">
+        Reports
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport" aria-expanded="true" aria-controls="collapseReport">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Reports</span>
+        </a>
+        <div id="collapseReport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Reports</h6>
+                <a class="collapse-item" href="{{route('reportcreate')}}">Add New</a>
+                <a class="collapse-item" href="{{route('reportcreate')}}">Reports List</a>
+                <!-- <a class="collapse-item" href="">Add New</a> -->
             </div>
-        </li>
+        </div>
+    </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
 
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">

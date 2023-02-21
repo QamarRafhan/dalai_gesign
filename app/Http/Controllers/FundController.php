@@ -11,15 +11,15 @@ use App\Imports\FundmanagementImport;
 class FundController extends Controller
 {
     protected $casts = [
-        'fname'=>'array'
+        'fname' => 'array'
     ];
     public function index()
     {
         // $funds=Fund::with('fundsManagement')->paginate(10);
         // dd($funds);
-        $funds=Fund::join('fund_management','fund_management.id_fund' ,'=','funds.id')->paginate(5);
-      
-        return view('funds.index',['funds' => $funds]);
+        $funds = Fund::join('fund_management', 'fund_management.id_fund', '=', 'funds.id')->paginate(5);
+
+        return view('funds.index', ['funds' => $funds]);
     }
     public function create()
     {
@@ -27,35 +27,37 @@ class FundController extends Controller
     }
     public function store(Request $request)
     {
-        $fname=new Fund;
-        $fname['name']=$request->name;
+        $fname = new Fund;
+        $fname['name'] = $request->name;
         $fname->save();
-        return redirect()->route('fundlist')->with('success','Fund Created Successfully.');
+        return redirect()->route('funds.index')->with('success', 'Fund Created Successfully.');
     }
     public function edit($id)
     {
-        $funds=FundManagement::findOrFail($id);
-        return view('funds.edit',['funds'=>$funds]);
+        $funds = FundManagement::findOrFail($id);
+        return view('funds.edit', ['funds' => $funds]);
     }
-    public function update(Request $request ,$id)
+    public function update(Request $request, $id)
     {
-        $funds=FundManagement::findOrFail($id);
+        $funds = FundManagement::findOrFail($id);
         $funds->update($request->all());
-        return redirect()->route('fundlist')->with('success','Fund Updated Successfully.');
+        return redirect()->route('funds.index')->with('success', 'Fund Updated Successfully.');
     }
     public function delete($id)
     {
-        $funds=FundManagement::findOrFail($id);
+        $funds = FundManagement::findOrFail($id);
         $funds->delete();
-        return redirect()->route('fundlist')->with('success','Fund deleted Successfully.');
+        return redirect()->route('funds.index')->with('success', 'Fund deleted Successfully.');
     }
 
 
-    public function importFundmanagment(){
+    public function importFundmanagment()
+    {
         return view('funds.fundmanagement');
     }
 
-    public function uploadFundmanagment(Request $request){
+    public function uploadFundmanagment(Request $request)
+    {
         Excel::import(new FundmanagementImport, $request->file);
         return redirect()->route('fundmanagment')->with('success', 'Funds Imported Successfully');
     }

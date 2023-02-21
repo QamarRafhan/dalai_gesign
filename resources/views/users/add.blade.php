@@ -115,6 +115,76 @@
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Address</label>
+                        <input 
+                            type="text" 
+                            class="form-control form-control-user @error('address') is-invalid @enderror" 
+                            
+                            placeholder="Address" 
+                            name="address" 
+                            value="{{ old('address') }}">
+
+                        @error('address')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>City</label>
+                        <input 
+                            type="text" 
+                            class="form-control form-control-user @error('city') is-invalid @enderror" 
+                            
+                            placeholder="City" 
+                            name="city" 
+                            value="{{ old('city') }}">
+
+                        @error('city')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Country</label>
+                        <input 
+                            type="text" 
+                            class="form-control form-control-user @error('country') is-invalid @enderror" 
+                            
+                            placeholder="Country" 
+                            name="Country" 
+                            value="{{ old('country') }}">
+
+                        @error('country')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Cp</label>
+                        <input 
+                            type="text" 
+                            class="form-control form-control-user @error('cp') is-invalid @enderror" 
+                            
+                            placeholder="Cp" 
+                            name="Cp" 
+                            value="{{ old('cp') }}">
+
+                        @error('Cp')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Dni</label>
+                        <input 
+                            type="text" 
+                            class="form-control form-control-user @error('dni') is-invalid @enderror" 
+                            
+                            placeholder="dni" 
+                            name="Dni" 
+                            value="{{ old('dni') }}">
+
+                        @error('dni')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
 
                 </div>
             </div>

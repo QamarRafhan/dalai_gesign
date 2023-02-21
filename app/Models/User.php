@@ -26,6 +26,12 @@ class User extends Authenticatable
         'role_id',
         'status',
         'password',
+        'address',
+        'city',
+        'cp',
+        'country',
+        'dni',
+        'type_user',
     ];
 
     /**

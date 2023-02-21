@@ -74,6 +74,11 @@ class UserController extends Controller
             'mobile_number' => 'required|numeric|digits:10',
             'role_id'       =>  'required|exists:roles,id',
             'status'       =>  'required|numeric|in:0,1',
+            'address'      =>  'required',
+            'city'      =>  'required',
+            'cp'      =>  'required',
+            'country'      =>  'required',
+            'type_user'      =>  'required',
         ]);
 
         DB::beginTransaction();

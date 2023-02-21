@@ -10,7 +10,7 @@
         <h1 class="h3 mb-0 text-gray-800">Funds</h1>
         <div class="row">
             <div class="col-md-6">
-                <a href="{{ route('fundcreate') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('funds.create') }}" class="btn btn-sm btn-primary">
                     <i class="fas fa-plus"></i> Add New
                 </a>
             </div>
