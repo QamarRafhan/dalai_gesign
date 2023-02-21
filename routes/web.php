@@ -67,6 +67,7 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function () {
 
     Route::get('export/', [UserController::class, 'export'])->name('export');
 });
+<<<<<<< HEAD
 
 
 Route::middleware('auth')->group(function () {
@@ -74,6 +75,19 @@ Route::middleware('auth')->group(function () {
     Route::resource('funds', FundController::class);
     Route::get('/funds/import', [FundController::class, 'importFundmanagment'])->name('fundmanagment');
     Route::post('/funds/store', [UserController::class, 'uploadFundmanagment'])->name('upload_fundmanagment');
+=======
+Route::get('/funds-list', [FundController::class, 'index'])->name('fundlist');
+Route::get('/funds-create', [FundController::class, 'create'])->name('fundcreate');
+
+Route::get('/editfunds/{id}', [FundController::class, 'edit'])->name('editfund');
+Route::get('/deletefunds/{id}', [FundController::class, 'delete'])->name('deletefund');
+Route::post('/updatefunds/{id}', [FundController::class, 'update'])->name('updatefund');
+
+
+Route::resource('funds', FundController::class);
+Route::get('/funds/import', [FundController::class, 'importFundmanagment'])->name('fundmanagment');
+Route::post('/funds/import_store', [UserController::class, 'uploadFundmanagment'])->name('upload_fundmanagment');
+>>>>>>> 88b1056369e05918bd05ecf8d55af6feaa0f6511
 
 
     Route::get('/Report-create', [ReportController::class, 'create'])->name('reportcreate');
