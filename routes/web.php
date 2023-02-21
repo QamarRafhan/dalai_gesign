@@ -41,10 +41,19 @@ Route::prefix('profile')->name('profile.')->middleware('auth')->group(function (
 
 
 
+Route::middleware('auth')->prefix('users')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+
+
+// Route::fallback(function () {
+//     return redirect('/');
+// });
 // Users 
 Route::middleware('auth')->prefix('users')->name('users.')->group(function () {
 
     Route::get('/', [UserController::class, 'index'])->name('index');
+
     Route::get('/create', [UserController::class, 'create'])->name('create');
     Route::post('/store', [UserController::class, 'store'])->name('store');
     Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
