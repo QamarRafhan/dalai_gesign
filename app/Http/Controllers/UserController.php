@@ -266,16 +266,6 @@ class UserController extends Controller
         
         return redirect()->route('users.useroperation')->with('success', 'UserOprations Imported Successfully');
     }
-
-    public function importFundmanagment(){
-        return view('funds.fundmanagement');
-    }
-
-    public function uploadFundmanagment(Request $request){
-        Excel::import(new FundmanagementImport, $request->file);
-        
-        return redirect()->route('users.fundmanagment')->with('success', 'UserOprations Imported Successfully');
-    }
     public function export() 
     {
         return Excel::download(new UsersExport, 'users.xlsx');

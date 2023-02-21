@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fund;
-use App\Models\FundManagement;
 use Illuminate\Http\Request;
+use App\Models\FundManagement;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\FundmanagementImport;
 
 class FundController extends Controller
 {
@@ -46,5 +48,15 @@ class FundController extends Controller
         $funds=FundManagement::findOrFail($id);
         $funds->delete();
         return redirect()->route('fundlist')->with('success','Fund deleted Successfully.');
+    }
+
+
+    public function importFundmanagment(){
+        return view('funds.fundmanagement');
+    }
+
+    public function uploadFundmanagment(Request $request){
+        Excel::import(new FundmanagementImport, $request->file);
+        return redirect()->route('fundmanagment')->with('success', 'Funds Imported Successfully');
     }
 }

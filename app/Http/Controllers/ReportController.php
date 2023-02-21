@@ -32,12 +32,7 @@ class ReportController extends Controller
     public function allrequests()
     {
 
-        $allreqs=UserRequest::first();
-        // dd($allreqs->fund);
-        
-        $allreqs = FundManagement::join('funds', 'funds.id', '=', 'fund_management.id_fund')
-            ->join('user_operations', 'user_operations.id_fund', '=', 'fund_management.id_fund')
-            ->where('fund_management.id_fund', '=', auth()->user()->id)->paginate(5);
+        $allreqs = UserRequest::paginate(5);
 
         return view('request.index', ['allreqs' => $allreqs]);
     }

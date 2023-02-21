@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('date')->nullable();
             $table->float('amount')->nullable();
             $table->float('amount_eur')->nullable();
+            $table->integer('operation_type')->default(0);
             $table->integer('status')->default(0);
             $table->timestamps();
         });

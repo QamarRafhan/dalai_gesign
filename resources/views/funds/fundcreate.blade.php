@@ -21,7 +21,7 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Add New Fund</h6>
         </div>
-        <form method="POST" action="{{route('fundsave')}}">
+        <form method="POST" action="{{route('funds.store')}}">
             @csrf
             <div class="card-body">
                 <div class="form-group row">

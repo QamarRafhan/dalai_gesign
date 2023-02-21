@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserRequest;
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\DB;
@@ -26,9 +27,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+
+        $request_opened = UserRequest::where(['ID_user' => $request->user()->id, 'status' => 0])->count();
+        return view('home', compact('request_opened'));
     }
 
     /**
@@ -59,7 +62,7 @@ class HomeController extends Controller
 
         try {
             DB::beginTransaction();
-            
+
             #Update Profile Data
             User::whereId(auth()->user()->id)->update([
                 'first_name' => $request->first_name,
@@ -72,7 +75,6 @@ class HomeController extends Controller
 
             #Return To Profile page with success
             return back()->with('success', 'Profile Updated Successfully.');
-            
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());
@@ -97,14 +99,13 @@ class HomeController extends Controller
             DB::beginTransaction();
 
             #Update Password
-            User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-            
+            User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
+
             #Commit Transaction
             DB::commit();
 
             #Return To Profile page with success
             return back()->with('success', 'Password Changed Successfully.');
-            
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());
