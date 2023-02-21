@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\FundmanagementImport;
 use App\Imports\UsersOperationImport;
+use Faker\Provider\ar_EG\Company;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
@@ -167,7 +168,7 @@ class UserController extends Controller
         $roles = Role::all();
         return view('users.edit')->with([
             'roles' => $roles,
-            'user'  => $user
+            'user'  => $user,
         ]);
     }
 

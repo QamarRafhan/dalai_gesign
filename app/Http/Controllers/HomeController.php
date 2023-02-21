@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Company;
 use App\Models\UserRequest;
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
@@ -64,9 +65,9 @@ class HomeController extends Controller
             'country'      =>  'required',
 
         ]);
-
+   
         try {
-
+           
             DB::beginTransaction();
 
             #Update Profile Data
@@ -80,7 +81,14 @@ class HomeController extends Controller
                 'country' => $request->country,
                 'dni' => $request->dni,
             ]);
-
+            Company::where('id_user','=',auth()->user()->id)->update([
+                'name' => $request->c_name,
+                'address' => $request->c_address,
+                'cp' => $request->c_cp,
+                'country' => $request->c_country,
+                'phone' => $request->c_phone,
+                'cif' => $request->c_cif,
+            ]);
             #Commit Transaction
             DB::commit();
 
