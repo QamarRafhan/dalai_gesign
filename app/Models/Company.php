@@ -20,7 +20,5 @@ class Company extends Model
         'country',
         'dni',
     ];
-    public function getUserCompnay(){
-        return $this->belongsTo(User::class,'id','id_user');
-    }
+
 }
