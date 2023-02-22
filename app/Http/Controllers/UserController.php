@@ -79,7 +79,7 @@ class UserController extends Controller
             'city'      =>  'required',
             'cp'      =>  'required',
             'country'      =>  'required',
-            'type_user'      =>  'required',
+            'dni'      =>  'required',
         ]);
 
         DB::beginTransaction();
@@ -93,7 +93,14 @@ class UserController extends Controller
                 'mobile_number' => $request->mobile_number,
                 'role_id'       => $request->role_id,
                 'status'        => $request->status,
-                'password'      => Hash::make($request->first_name.'@'.$request->mobile_number)
+                'password'      => Hash::make($request->first_name.'@'.$request->mobile_number),
+                'city'        => $request->city,
+                'address'        => $request->address,
+                'country'        => $request->country,
+                'dni'        => $request->dni,
+                'cp'        => $request->cp,
+
+
             ]);
 
             // Delete Any Existing Role
@@ -188,6 +195,11 @@ class UserController extends Controller
             'mobile_number' => 'required|numeric|digits:10',
             'role_id'       =>  'required|exists:roles,id',
             'status'       =>  'required|numeric|in:0,1',
+            'address'      =>  'required',
+            'city'      =>  'required',
+            'cp'      =>  'required',
+            'country'      =>  'required',
+            'dni'      =>  'required',
         ]);
 
         DB::beginTransaction();
@@ -201,6 +213,14 @@ class UserController extends Controller
                 'mobile_number' => $request->mobile_number,
                 'role_id'       => $request->role_id,
                 'status'        => $request->status,
+                'city'        => $request->city,
+                'address'        => $request->address,
+                'country'        => $request->country,
+                'dni'        => $request->dni,
+                'cp'        => $request->cp,
+
+
+
             ]);
 
             // Delete Any Existing Role

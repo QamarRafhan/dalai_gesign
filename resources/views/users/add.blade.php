@@ -150,7 +150,7 @@
                             class="form-control form-control-user @error('country') is-invalid @enderror" 
                             
                             placeholder="Country" 
-                            name="Country" 
+                            name="country" 
                             value="{{ old('country') }}">
 
                         @error('country')
@@ -164,10 +164,10 @@
                             class="form-control form-control-user @error('cp') is-invalid @enderror" 
                             
                             placeholder="Cp" 
-                            name="Cp" 
+                            name="cp" 
                             value="{{ old('cp') }}">
 
-                        @error('Cp')
+                        @error('cp')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
@@ -178,7 +178,7 @@
                             class="form-control form-control-user @error('dni') is-invalid @enderror" 
                             
                             placeholder="dni" 
-                            name="Dni" 
+                            name="dni" 
                             value="{{ old('dni') }}">
 
                         @error('dni')
