@@ -14,7 +14,6 @@
     @include('common.alert')
 
     {{-- Page Content --}}
-
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -107,7 +106,7 @@
                     <div id='collapsediv1' class='collapse div1 row mt-2'>
                         <div class="col-md-4 mb-2">
                             <label class="labels"> <span style="color:red;">*</span>Company Name</label>
-                            <input type="text" class="form-control  @error('c_name') is-invalid @enderror" placeholder="Company Name" name="c_name" value="{{ old('name', auth()->user()->getUserCompnay->name) }}">
+                            <input type="text" class="form-control  @error('c_name') is-invalid @enderror" placeholder="Company Name" name="c_name" value="{{ old('c_name', auth()->user()->getUserCompnay->name) }}">
 
                             @error('c_name')
                             <span class="text-danger">{{$message}}</span>

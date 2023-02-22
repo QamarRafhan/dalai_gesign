@@ -11,14 +11,14 @@ class Company extends Model
     protected $table = 'company';
 
     public $fillable = [
-        'first_name',
-        'last_name',
-        'mobile_number',
+        'id_user',
+        'name',
+        'phone',
         'address',
         'city',
         'cp',
         'country',
-        'dni',
+        'cif',
     ];
 
 }

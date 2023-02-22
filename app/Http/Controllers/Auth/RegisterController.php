@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\Company;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -50,8 +51,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email','unique:users'],
+            'mobile_number' => ['required'],
+            'address' => ['required','string', 'max:255'],
+            'city' => ['required','string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,10 +69,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+       $user= User::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'mobile_number' => $data['mobile_number'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'cp' => $data['cp'],
+            'country' => $data['country'],
+            'dni' => $data['dni'],
             'password' => Hash::make($data['password']),
         ]);
+
+        if(key_exists('is_coppmany',$data)){
+            Company::create([
+                'id_user'=>$user->id,
+                'name' => $data['c_name'],
+                'address' => $data['c_address'],
+                'cp' => $data['c_cp'],
+                'country' => $data['c_country'],
+                'phone' => $data['c_phone'],
+                'cif' => $data['c_cif'],
+            ]);
+        }
+       
+        return  $user;
     }
 }
