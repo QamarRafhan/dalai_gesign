@@ -41,9 +41,15 @@ class HomeController extends Controller
      * @return View Profile
      * @author Shani Singh
      */
-    public function getProfile()
+    public function getProfile(Request $request)
     {
-        return view('profile');
+
+        $userCompnay = $request->user()->getUserCompnay;
+        if (!$userCompnay) {
+            $userCompnay = new Company();
+        }
+
+        return view('profile', ['userCompnay' => $userCompnay]);
     }
 
     /**
@@ -63,12 +69,13 @@ class HomeController extends Controller
             'city'      =>  'required',
             'cp'      =>  'required',
             'country'      =>  'required',
+            'is_company' => 'sometimes'
 
         ]);
-   
+
         try {
-           
-            DB::beginTransaction();
+
+            // DB::beginTransaction();
 
             #Update Profile Data
             User::whereId(auth()->user()->id)->update([
@@ -81,14 +88,27 @@ class HomeController extends Controller
                 'country' => $request->country,
                 'dni' => $request->dni,
             ]);
-            Company::where('id_user','=',auth()->user()->id)->update([
-                'name' => $request->c_name,
-                'address' => $request->c_address,
-                'cp' => $request->c_cp,
-                'country' => $request->c_country,
-                'phone' => $request->c_phone,
-                'cif' => $request->c_cif,
-            ]);
+
+            if ($request->is_company) {
+                Company::updateOrCreate(
+                    [
+                        'id_user' => auth()->user()->id
+                    ],
+                    [
+                        'name' => $request->c_name,
+                        'id_user' => auth()->user()->id,
+                        'address' => $request->c_address,
+                        'cp' => $request->c_cp,
+                        'country' => $request->c_country,
+                        'phone' => $request->c_phone,
+                        'cif' => $request->c_cif,
+                    ]
+                );
+            } else {
+                Company::where('id_user', auth()->user()->id)->delete();
+            }
+
+
             #Commit Transaction
             DB::commit();
 

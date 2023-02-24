@@ -21,7 +21,7 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Import Fund Management</h6>
         </div>
-        <form method="POST" action="{{route('users.upload_fundmanagment')}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('upload_fundmanagment')}}" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-group row">
@@ -49,7 +49,7 @@
 
             <div class="card-footer">
                 <button type="submit" class="btn btn-success btn-user float-right mb-3">Upload Fund Management</button>
-                <a class="btn btn-primary float-right mr-3 mb-3" href="{{ route('users.index') }}">Cancel</a>
+                <a class="btn btn-primary float-right mr-3 mb-3" href="{{ route('funds.index') }}">Cancel</a>
             </div>
         </form>
     </div>

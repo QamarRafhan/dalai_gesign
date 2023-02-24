@@ -13,12 +13,10 @@ class Company extends Model
     public $fillable = [
         'id_user',
         'name',
-        'phone',
         'address',
-        'city',
         'cp',
         'country',
+        'phone',
         'cif',
     ];
-
 }

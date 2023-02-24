@@ -10,15 +10,11 @@ use App\Imports\FundmanagementImport;
 
 class FundController extends Controller
 {
-    protected $casts = [
-        'fname' => 'array'
-    ];
+
     public function index()
     {
-        // $funds=Fund::with('fundsManagement')->paginate(10);
-        // dd($funds);
-        $funds = Fund::join('fund_management', 'fund_management.id_fund', '=', 'funds.id')->paginate(5);
 
+        $funds = Fund::paginate(5);
         return view('funds.index', ['funds' => $funds]);
     }
     public function create()

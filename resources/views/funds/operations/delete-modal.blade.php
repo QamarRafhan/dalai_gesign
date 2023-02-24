@@ -7,13 +7,13 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Select "Delete" below if you want to delete Report!.</div>
+            <div class="modal-body">Select "Delete" below if you want to delete found operations!.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                 <a class="btn btn-danger" href="#" onclick="event.preventDefault(); document.getElementById('report-delete-form').submit();">
                     Delete
                 </a>
-                <form id="report-delete-form" method="POST" action="">
+                <form id="delete_model_form" method="POST" action="">
                     @csrf
                     @method('DELETE')
                 </form>

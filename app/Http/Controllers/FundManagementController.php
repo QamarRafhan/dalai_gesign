@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Report;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
-class ReportController extends Controller
+class FundManagementController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +13,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $reports = Report::orderBy('date', 'DESC')->paginate(10);
-
-        return view('reports.index', ['reports' => $reports]);
+        //
     }
 
     /**
@@ -30,8 +23,7 @@ class ReportController extends Controller
      */
     public function create()
     {
-        $report = new Report;
-        return view('reports.create', ['report' => $report]);
+        //
     }
 
     /**
@@ -42,17 +34,7 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        $banner = new Report();
-        $data = $request->only($banner->getFillable());
-        if ($request->hasFile('report_file')) {
-            $image = $request->file('report_file');
-            $imageName = rand(111111, 9999999) . $image->getClientOriginalName();
-            Storage::putFileAs('public/report_file', $image, $imageName);
-            $data['route'] = $imageName;
-        }
-        $data['date'] = Carbon::now()->format('d-m-Y');
-        $banner->fill($data)->save();
-        return redirect()->route('reports.index')->with('success', 'Report Added Successfully.');
+        //
     }
 
     /**

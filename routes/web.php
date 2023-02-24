@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FundController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RequestController;
+use App\Http\Controllers\FundOperationController;
+use App\Http\Controllers\FundManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,21 +64,25 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
-    // funds
-    Route::resource('funds', FundController::class);
+
     Route::get('/funds/import', [FundController::class, 'importFundmanagment'])->name('fundmanagment');
-    Route::post('/funds/store', [UserController::class, 'uploadFundmanagment'])->name('upload_fundmanagment');
+    Route::post('/funds/store', [FundController::class, 'uploadFundmanagment'])->name('upload_fundmanagment');
+    Route::resource('funds', FundController::class);
+
+    Route::prefix('funds')->name('funds.')->group(function () {
+        Route::resource('{fund}/operations', FundOperationController::class);
+        Route::resource('{fund}/fund-management', FundManagementController::class);
+    });
 
 
-    Route::get('/Report-create', [ReportController::class, 'create'])->name('reportcreate');
-    Route::post('/Report-save', [ReportController::class, 'store'])->name('reportsave');
-    Route::get('/requests', [ReportController::class, 'allrequests'])->name('allrequests');
+    Route::resource('reports', ReportController::class);
+    Route::resource('requests', RequestController::class);
 });
 
 
 
 
 
-Route::fallback(function () {
-    return redirect()->route('login');
-});
+// Route::fallback(function () {
+//     return redirect()->route('login');
+// });

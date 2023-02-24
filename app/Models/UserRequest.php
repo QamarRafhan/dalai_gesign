@@ -26,8 +26,18 @@ class UserRequest extends Model
     ];
 
 
+    public $allStatus = [
+        'Requested',
+        'Accepted',
+        'Completed',
+
+    ];
+
+    protected $casts = [
+        'date' => 'datetime',
+    ];
     public function fund()
     {
-        return $this->belongsTo(Fund::class, 'id', 'ID_fund');
+        return $this->belongsTo(Fund::class, 'ID_fund', 'id');
     }
 }

@@ -128,7 +128,7 @@
                             
                             placeholder="Address" 
                             name="address" 
-                            value="{{ old('address') }}">
+                            value="{{ old('address', $user->address) }}">
 
                         @error('address')
                             <span class="text-danger">{{$message}}</span>
@@ -142,7 +142,7 @@
                             
                             placeholder="City" 
                             name="city" 
-                            value="{{ old('city') }}">
+                            value="{{ old('city', $user->city) }}">
 
                         @error('city')
                             <span class="text-danger">{{$message}}</span>
@@ -156,7 +156,7 @@
                             
                             placeholder="Country" 
                             name="country" 
-                            value="{{ old('country') }}">
+                            value="{{ old('country', $user->country) }}">
 
                         @error('country')
                             <span class="text-danger">{{$message}}</span>
@@ -170,7 +170,7 @@
                             
                             placeholder="Cp" 
                             name="cp" 
-                            value="{{ old('cp') }}">
+                            value="{{ old('cp', $user->cp) }}">
 
                         @error('cp')
                             <span class="text-danger">{{$message}}</span>
@@ -184,7 +184,7 @@
                             
                             placeholder="dni" 
                             name="dni" 
-                            value="{{ old('dni') }}">
+                            value="{{ old('dni', $user->cp) }}">
 
                         @error('dni')
                             <span class="text-danger">{{$message}}</span>

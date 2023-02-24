@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Report;
+use App\Models\Fund;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Models\FundOperation;
 
-class ReportController extends Controller
+class FundOperationController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Fund $fund)
     {
-        $reports = Report::orderBy('date', 'DESC')->paginate(10);
-
-        return view('reports.index', ['reports' => $reports]);
+        $operations = FundOperation::where('ID_fund', $fund->id)->paginate(10);
+        return view('funds.operations.index', ['fund' => $fund, 'operations' => $operations]);
     }
 
     /**
@@ -28,10 +24,10 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Fund $fund)
     {
-        $report = new Report;
-        return view('reports.create', ['report' => $report]);
+        $fundOperation = new FundOperation();
+        return view('funds.operations.create', ['fund' => $fund, 'fundOperation' => $fundOperation]);
     }
 
     /**
@@ -42,17 +38,7 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        $banner = new Report();
-        $data = $request->only($banner->getFillable());
-        if ($request->hasFile('report_file')) {
-            $image = $request->file('report_file');
-            $imageName = rand(111111, 9999999) . $image->getClientOriginalName();
-            Storage::putFileAs('public/report_file', $image, $imageName);
-            $data['route'] = $imageName;
-        }
-        $data['date'] = Carbon::now()->format('d-m-Y');
-        $banner->fill($data)->save();
-        return redirect()->route('reports.index')->with('success', 'Report Added Successfully.');
+        //
     }
 
     /**
@@ -81,22 +67,25 @@ class ReportController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  FundOperation  $operation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, FundOperation $operation)
     {
-        //
+        $data = $request->only($operation->getFillable());
+        $request->fill($data)->save();
+        return redirect()->route('requests.index')->with('success', 'Data Updated Successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  FundOperation  $operation
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, FundOperation $operation)
     {
-        //
+        $operation->delete();
+        return redirect()->route('requests.index')->with('success', 'Record Removed Successfully.');
     }
 }

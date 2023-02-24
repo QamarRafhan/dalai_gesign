@@ -53,10 +53,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email','unique:users'],
+            'email' => ['required', 'email', 'unique:users'],
             'mobile_number' => ['required'],
-            'address' => ['required','string', 'max:255'],
-            'city' => ['required','string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -69,7 +69,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-       $user= User::create([
+
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
@@ -82,9 +83,11 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        if(key_exists('is_coppmany',$data)){
+        $user->assignRole('Client');
+
+        if (key_exists('is_company', $data)) {
             Company::create([
-                'id_user'=>$user->id,
+                'id_user' => $user->id,
                 'name' => $data['c_name'],
                 'address' => $data['c_address'],
                 'cp' => $data['c_cp'],
@@ -93,7 +96,7 @@ class RegisterController extends Controller
                 'cif' => $data['c_cif'],
             ]);
         }
-       
+
         return  $user;
     }
 }
