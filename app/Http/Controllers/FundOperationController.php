@@ -58,9 +58,10 @@ class FundOperationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Fund $fund, FundOperation $operation)
     {
-        //
+        
+        return view('funds.operations.edit', ['fund' => $fund,'fundOperation' => $operation]);
     }
 
     /**
@@ -70,11 +71,11 @@ class FundOperationController extends Controller
      * @param  FundOperation  $operation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FundOperation $operation)
+    public function update(Request $request,Fund $fund ,FundOperation $operation)
     {
         $data = $request->only($operation->getFillable());
-        $request->fill($data)->save();
-        return redirect()->route('requests.index')->with('success', 'Data Updated Successfully.');
+        $operation->fill($data)->save();
+        return redirect()->route('funds.operations.index', ['fund' => $fund])->with('success', 'Data Updated Successfully.');
     }
 
     /**

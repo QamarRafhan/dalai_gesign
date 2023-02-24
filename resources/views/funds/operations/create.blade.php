@@ -28,10 +28,91 @@
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
-                        <span style="color:red;">*</span>Fund Name</label>
-                        <input type="text" class="form-control form-control-user @error('name') is-invalid @enderror" id="exampleFirstName" placeholder="Name" name="name" value="{{ old('name') }}">
+                        <span style="color:red;">*</span>Date</label>
+                        <input type="text" class="form-control form-control-user @error('date') is-invalid @enderror"  placeholder="Date" name="date" value="{{ old('date', $fundOperation->date) }}">
 
                         @error('name')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Token Investment</label>
+                        <input type="text" class="form-control form-control-user @error('token_investment') is-invalid @enderror"  placeholder="Token Investment" name="token_investment" value="{{ old('token_investment',$fundOperation->token_investment) }}">
+
+                        @error('token_investment')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Eur Investment</label>
+                        <input type="text" class="form-control form-control-user @error('eur_investment') is-invalid @enderror"  placeholder="Eur Investment" name="eur_investment" value="{{ old('eur_investment',$fundOperation->eur_investment) }}">
+
+                        @error('eur_investment')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Num Tokens	</label>
+                        <input type="text" class="form-control form-control-user @error('num_tokens') is-invalid @enderror"  placeholder="Num Tokens" name="num_tokens" value="{{ old('num_tokens',$fundOperation->num_tokens) }}">
+
+                        @error('num_tokens')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Value Beginning</label>
+                        <input type="text" class="form-control form-control-user @error('value_beginning') is-invalid @enderror"  placeholder="Value Beginning" name="value_beginning" value="{{ old('value_beginning',$fundOperation->value_beginning) }}">
+
+                        @error('value_beginning')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Value Imported</label>
+                        <input type="text" class="form-control form-control-user @error('value_imported') is-invalid @enderror"  placeholder="Value Imported" name="value_imported" value="{{ old('value_imported',$fundOperation->value_imported) }}">
+
+                        @error('value_imported')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Value End</label>
+                        <input type="text" class="form-control form-control-user @error('value_end') is-invalid @enderror"  placeholder="Value Imported" name="value_end" value="{{ old('value_end',$fundOperation->value_end) }}">
+
+                        @error('value_end')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Token Value</label>
+                        <input type="text" class="form-control form-control-user @error('token_value') is-invalid @enderror"  placeholder="Token Value" name="token_value" value="{{ old('token_value',$fundOperation->token_value) }}">
+
+                        @error('token_value')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Profit</label>
+                        <input type="text" class="form-control form-control-user @error('profit') is-invalid @enderror"  placeholder="Profit" name="profit" value="{{ old('profit',$fundOperation->profit) }}">
+
+                        @error('profit')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Increase</label>
+                        <input type="text" class="form-control form-control-user @error('increase') is-invalid @enderror"  placeholder="Increase" name="increase" value="{{ old('increase',$fundOperation->increase) }}">
+
+                        @error('increase')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                        <span style="color:red;">*</span>Commissions</label>
+                        <input type="text" class="form-control form-control-user @error('commissions') is-invalid @enderror"  placeholder="Commissions" name="commissions" value="{{ old('commissions',$fundOperation->commissions) }}">
+
+                        @error('commissions')
                         <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>

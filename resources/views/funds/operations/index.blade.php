@@ -54,13 +54,14 @@
 
                             <td style="display: flex">
 
-                                <a href="{{route('funds.edit',['fund' => $fund->id])}}" class="btn btn-primary m-2">
+                                <a href="{{ route('funds.operations.edit', ['fund' => $fund->id, 'operation' => $single]) }}" class="btn btn-primary m-2">
                                     <i class="fa fa-pen"></i>
                                 </a>
                                 <a data-toggle="modal" data-load-url="{{ route('funds.operations.destroy', ['fund' => $fund->id, 'operation' => $single]) }}" data-target="#deleteModal3" href="#" class="btn btn-danger m-2 delete_model">
 
                                     <i class="fas fa-trash"></i>
                                 </a>
+                                
                             </td>
                         </tr>
                         @empty
