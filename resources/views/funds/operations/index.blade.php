@@ -35,11 +35,16 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th width="20%">Name</th>
-                            <th width="25%">Source</th>
-                            <th width="15%">Value</th>
-                            <th width="15%">Currency</th>
-                            <th width="15%">Actions</th>
+                            <th>Date</th>
+                            <th>Token Investment</th>
+                            <th>Eur Investment</th>
+                            <th>Num Tokens</th>
+                            <th>Value Imported</th>
+                            <th>Token Value</th>
+                            <th>Profit</th>
+                            <th>Increase</th>
+                            <th>Commissions</th>
+                            <th>Actions</th>
 
 
                         </tr>
@@ -47,10 +52,15 @@
                     <tbody>
                         @forelse($operations as $single)
                         <tr>
-                            <td>{{ $single->name }}</td>
-                            <td>{{ $single->currency }}</td>
-                            <td>{{$single->value_eur}}</td>
-
+                            <td>{{ $single->date }}</td>
+                            <td>{{ $single->token_investment }}</td>
+                            <td>{{ $single->eur_investment }}</td>
+                            <td>{{$single->num_tokens}}</td>
+                            <td>{{ $single->value_imported }}</td>
+                            <td>{{ $single->token_value }}</td>
+                            <td>{{ $single->profit }}</td>
+                            <td>{{ $single->increase }}</td>
+                            <td>{{ $single->commissions }}</td>
 
                             <td style="display: flex">
 

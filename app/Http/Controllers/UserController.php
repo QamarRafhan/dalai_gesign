@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Company;
 use App\Exports\UsersExport;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
@@ -13,7 +14,6 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\FundmanagementImport;
 use App\Imports\UsersOperationImport;
-use Faker\Provider\ar_EG\Company;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
@@ -102,7 +102,19 @@ class UserController extends Controller
 
 
             ]);
-
+            if ($request->is_company) {
+                Company::create([
+                    'id_user' => $user->id,
+                    'name' => $request->c_name,
+                    'address' => $request->c_address,
+                    'cp' => $request->c_cp,
+                    'country' => $request->c_country,
+                    'phone' => $request->c_phone,
+                    'cif' => $request->c_cif,
+                ]);
+            }
+           
+            
             // Delete Any Existing Role
             DB::table('model_has_roles')->where('model_id', $user->id)->delete();
 
@@ -112,7 +124,7 @@ class UserController extends Controller
             } else {
                 $user->assignRole($user->role_id);
             }
-
+           
 
             // Commit And Redirected To Listing
             DB::commit();
@@ -221,6 +233,17 @@ class UserController extends Controller
 
 
             ]);
+            if ($request->is_company) {
+                Company::create([
+                    'id_user' => $user->id,
+                    'name' => $request->c_name,
+                    'address' => $request->c_address,
+                    'cp' => $request->c_cp,
+                    'country' => $request->c_country,
+                    'phone' => $request->c_phone,
+                    'cif' => $request->c_cif,
+                ]);
+            }
 
             // Delete Any Existing Role
             DB::table('model_has_roles')->where('model_id', $user->id)->delete();
