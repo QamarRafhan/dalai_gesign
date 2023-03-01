@@ -27,7 +27,7 @@ class FundManagementController extends Controller
     public function create(Fund $fund)
     {
         $management = new FundManagement();
-        return view('funds.managements.create', ['fund' => $fund, 'management' => $management]);
+        return view('funds.managements.create', ['fund' => $fund, 'fundmanagement' => $management]);
     }
 
     /**
@@ -62,34 +62,36 @@ class FundManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Fund $fund,FundManagement $fund_management)
     {
         //
+        
+        return view('funds.managements.edit', ['fund' => $fund, 'fund_management' => $fund_management]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  FundManagement  $operation
+     * @param  FundManagement  $fund_management
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FundManagement $operation)
+    public function update(Request $request,Fund $fund, FundManagement $fund_management)
     {
-        $data = $request->only($operation->getFillable());
-        $request->fill($data)->save();
-        return redirect()->route('requests.index')->with('success', 'Data Updated Successfully.');
+        $data = $request->only($fund_management->getFillable());
+        $fund_management->fill($data)->save();
+        return redirect()->route('funds.fund-management.index', ['fund' => $fund])->with('success', 'Data Updated Successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  FundManagement  $operation
+     * @param  FundManagement  $fund_management
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, FundManagement $operation)
+    public function destroy( Fund $fund,FundManagement $fund_management)
     {
-        $operation->delete();
-        return redirect()->route('requests.index')->with('success', 'Record Removed Successfully.');
+        $fund_management->delete();
+        return redirect()->route('funds.fund-management.index', ['fund' => $fund])->with('success', 'Record Removed Successfully.');
     }
 }
