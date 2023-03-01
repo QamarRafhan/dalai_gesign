@@ -203,7 +203,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // Validations
+        dd($request);
+         // Validations
         $request->validate([
             'first_name'    => 'required',
             'last_name'     => 'required',
@@ -239,7 +240,11 @@ class UserController extends Controller
 
             ]);
             if ($request->is_company) {
-                Company::updateOrCreate([
+                Company::updateOrCreate(
+                    [
+                        'id_user' => $user->id
+                    ]
+                    ,[
                     'id_user' => $user->id,
                     'name' => $request->c_name,
                     'address' => $request->c_address,

@@ -208,7 +208,6 @@
                     <div class="col-md-4 mb-2">
                         <label class="labels"> <span style="color:red;">*</span>Company Address</label>
                         <input type="text" class="form-control  @error('c_address') is-invalid @enderror" placeholder="Company Address" name="c_address" value="{{ old('address', $userCompnay->address) }}">
->
 
                         @error('c_address')
                         <span class="text-danger">{{$message}}</span>
