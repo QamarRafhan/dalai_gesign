@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles')->where('id','!=', 1)->paginate(10);
+        $users = User::with('roles')->where('id', '!=', 1)->paginate(10);
         return view('users.index', ['users' => $users]);
     }
 
@@ -113,8 +113,8 @@ class UserController extends Controller
                     'cif' => $request->c_cif,
                 ]);
             }
-           
-            
+
+
             // Delete Any Existing Role
             DB::table('model_has_roles')->where('model_id', $user->id)->delete();
 
@@ -124,7 +124,7 @@ class UserController extends Controller
             } else {
                 $user->assignRole($user->role_id);
             }
-           
+
 
             // Commit And Redirected To Listing
             DB::commit();
@@ -181,12 +181,18 @@ class UserController extends Controller
      * @return Collection $user
      * @author Shani Singh
      */
-    public function edit(User $user)
+    public function edit(User $user, Request $request)
     {
         $roles = Role::all();
+
+        $userCompnay = $user->getUserCompnay;
+        if (!$userCompnay) {
+            $userCompnay = new Company();
+        }
         return view('users.edit')->with([
             'roles' => $roles,
             'user'  => $user,
+            'userCompnay' => $userCompnay,
         ]);
     }
 
@@ -198,7 +204,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // Validations
+
         $request->validate([
             'first_name'    => 'required',
             'last_name'     => 'required',
@@ -211,48 +217,54 @@ class UserController extends Controller
             'cp'      =>  'required',
             'country'      =>  'required',
             'dni'      =>  'required',
+            'is_company' => 'sometimes'
         ]);
 
         DB::beginTransaction();
         try {
-
             // Store Data
             $user_updated = User::whereId($user->id)->update([
                 'first_name'    => $request->first_name,
                 'last_name'     => $request->last_name,
                 'email'         => $request->email,
                 'mobile_number' => $request->mobile_number,
-                // 'role_id'       => $request->role_id,
+                'role_id'       => $request->role_id,
                 'status'        => $request->status,
                 'city'        => $request->city,
                 'address'        => $request->address,
                 'country'        => $request->country,
                 'dni'        => $request->dni,
                 'cp'        => $request->cp,
-
-
-
             ]);
             if ($request->is_company) {
-                Company::create([
-                    'id_user' => $user->id,
-                    'name' => $request->c_name,
-                    'address' => $request->c_address,
-                    'cp' => $request->c_cp,
-                    'country' => $request->c_country,
-                    'phone' => $request->c_phone,
-                    'cif' => $request->c_cif,
-                ]);
+
+
+                Company::updateOrCreate(
+                    [
+                        'id_user' => $user->id
+                    ],
+                    [
+                        'id_user' => $user->id,
+                        'name' => $request->c_name,
+                        'address' => $request->c_address,
+                        'cp' => $request->c_cp,
+                        'country' => $request->c_country,
+                        'phone' => $request->c_phone,
+                        'cif' => $request->c_cif,
+                    ]
+                );
+            } else {
+                Company::where(['id_user' => $user->id])->delete();
             }
 
             // Delete Any Existing Role
-            DB::table('model_has_roles')->where('model_id', $user->id)->delete();
+            // DB::table('model_has_roles')->where('model_id', $user->id)->delete();
 
             // Assign Role To User
             if (auth()->user()->hasRole('Agent')) {
                 $user->assignRole('Client');
             } else {
-                $user->assignRole($user->role_id);
+                $user->assignRole($request->role_id);
             }
 
             // Commit And Redirected To Listing

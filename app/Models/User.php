@@ -63,7 +63,8 @@ class User extends Authenticatable
         return "{$this->first_name} {$this->last_name}";
     }
 
-    public function getUserCompnay(){
-        return $this->belongsTo(Company::class,'id','id_user');
+    public function getUserCompnay()
+    {
+        return $this->belongsTo(Company::class, 'id', 'id_user');
     }
 }
