@@ -193,11 +193,18 @@
 
                 </div>
                 <div class="form-group">
+<<<<<<< HEAD
                         <input class="company_checkbox" type='checkbox' data-toggle='collapse' data-target='#collapsediv1' {{old("is_company", $userCompnay->id)>0? 'checked' : ''}}> Company
                         </input>
                         <input class="is_company" type='hidden' name="is_company" value='{{old("is_company", $userCompnay->id)}}' }}>
                     </div>
                 <div id='collapsediv1' class='collapse div1 row mt-2 {{(old('is_company',$userCompnay->id)>0) ? 'show' : ''}}'>
+=======
+                    <input type='checkbox' data-toggle='collapse' name="is_company" data-target='#collapsediv1' > Company
+                    </input>
+                </div>
+                <div id='collapsediv1' class='collapse div1 row mt-2'>
+>>>>>>> fdcc9cc8fcb3505fc94f6c383d8fcd412b3e99f4
                     <div class="col-md-4 mb-2">
                         <label class="labels"> <span style="color:red;">*</span>Company Name</label>
                         <input type="text" class="form-control  @error('c_name') is-invalid @enderror" placeholder="Company Name" name="c_name" value="{{ old('name', $userCompnay->name) }}">
