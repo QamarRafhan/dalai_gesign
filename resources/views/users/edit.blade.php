@@ -193,13 +193,13 @@
 
                 </div>
                 <div class="form-group">
-                    <input type='checkbox' data-toggle='collapse' name="is_company" data-target='#collapsediv1'> Company
+                    <input type='checkbox' data-toggle='collapse' name="is_company" data-target='#collapsediv1' > Company
                     </input>
                 </div>
                 <div id='collapsediv1' class='collapse div1 row mt-2'>
                     <div class="col-md-4 mb-2">
                         <label class="labels"> <span style="color:red;">*</span>Company Name</label>
-                        <input type="text" class="form-control  @error('c_name') is-invalid @enderror" placeholder="Company Name" name="c_name">
+                        <input type="text" class="form-control  @error('c_name') is-invalid @enderror" placeholder="Company Name" name="c_name" value="{{ old('name', $userCompnay->name) }}">
 
                         @error('c_name')
                         <span class="text-danger">{{$message}}</span>
@@ -207,7 +207,8 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label class="labels"> <span style="color:red;">*</span>Company Address</label>
-                        <input type="text" class="form-control  @error('c_address') is-invalid @enderror" placeholder="Company Address" name="c_address">
+                        <input type="text" class="form-control  @error('c_address') is-invalid @enderror" placeholder="Company Address" name="c_address" value="{{ old('address', $userCompnay->address) }}">
+>
 
                         @error('c_address')
                         <span class="text-danger">{{$message}}</span>
@@ -215,7 +216,7 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label class="labels"> <span style="color:red;">*</span>Company Country</label>
-                        <input type="text" class="form-control  @error('c_country') is-invalid @enderror" placeholder="Company Country" name="c_country">
+                        <input type="text" class="form-control  @error('c_country') is-invalid @enderror" placeholder="Company Country" name="c_country" value="{{ old('country', $userCompnay->country) }}">
 
                         @error('c_country')
                         <span class="text-danger">{{$message}}</span>
@@ -223,7 +224,7 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label class="labels"> <span style="color:red;">*</span>Company Cp</label>
-                        <input type="text" class="form-control  @error('c_cp') is-invalid @enderror" placeholder="Cp" name="c_cp">
+                        <input type="text" class="form-control  @error('c_cp') is-invalid @enderror" placeholder="Cp" name="c_cp" value="{{ old('cp', $userCompnay->cp) }}">
 
                         @error('c_cp')
                         <span class="text-danger">{{$message}}</span>
@@ -231,7 +232,7 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label class="labels"> <span style="color:red;">*</span>Company Phone</label>
-                        <input type="text" class="form-control  @error('c_phone') is-invalid @enderror" placeholder="Company Phone" name="c_phone">
+                        <input type="text" class="form-control  @error('c_phone') is-invalid @enderror" placeholder="Company Phone" name="c_phone" value="{{ old('phone', $userCompnay->phone) }}">
 
                         @error('c_phone')
                         <span class="text-danger">{{$message}}</span>
@@ -239,7 +240,7 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label class="labels"> <span style="color:red;">*</span>Company CIF</label>
-                        <input type="text" class="form-control  @error('c_cif') is-invalid @enderror" placeholder="Company CIF" name="c_cif">
+                        <input type="text" class="form-control  @error('c_cif') is-invalid @enderror" placeholder="Company CIF" name="c_cif" value="{{ old('cif', $userCompnay->cif) }}">
 
                         @error('c_cif')
                         <span class="text-danger">{{$message}}</span>

@@ -181,12 +181,17 @@ class UserController extends Controller
      * @return Collection $user
      * @author Shani Singh
      */
-    public function edit(User $user)
+    public function edit(User $user ,Request $request)
     {
         $roles = Role::all();
+        $userCompnay = $request->user()->getUserCompnay;
+        if (!$userCompnay) {
+            $userCompnay = new Company();
+        }
         return view('users.edit')->with([
             'roles' => $roles,
             'user'  => $user,
+            'userCompnay' => $userCompnay,
         ]);
     }
 
@@ -234,7 +239,7 @@ class UserController extends Controller
 
             ]);
             if ($request->is_company) {
-                Company::create([
+                Company::updateOrCreate([
                     'id_user' => $user->id,
                     'name' => $request->c_name,
                     'address' => $request->c_address,
