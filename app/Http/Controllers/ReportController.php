@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('role:Admin', ['except' => ['index']]);
+    }
 
     /**
      * Display a listing of the resource.

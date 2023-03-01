@@ -22,7 +22,7 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    @hasanyrole('Admin|Agent')
+    @hasanyrole('Admin')
     <div class="sidebar-heading">
         Management
     </div>
@@ -39,8 +39,8 @@
                 <a class="collapse-item" href="{{ route('users.index') }}">List</a>
                 <a class="collapse-item" href="{{ route('users.create') }}">Add New</a>
                 <a class="collapse-item" href="{{ route('users.import') }}">Import Data</a>
-                <a class="collapse-item" href="{{ route('requests.index') }}">Requests</a>
-                <a class="collapse-item" href="{{ route('users.useroperation') }}">Import UserOperation</a>
+               
+                <a class="collapse-item" href="{{ route('users.useroperation') }}">Import User Operation</a>
             </div>
         </div>
     </li>
@@ -72,7 +72,7 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-    @endhasrole
+
     <!-- Heading -->
     <div class="sidebar-heading">
         Funds
@@ -93,7 +93,7 @@
             </div>
         </div>
     </li>
-
+    @endhasrole
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
     <div class="sidebar-heading">
@@ -109,13 +109,59 @@
         <div id="collapseReport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Reports</h6>
+                @hasrole('Admin')
                 <a class="collapse-item" href="{{route('reports.create')}}">Add New</a>
+                @endhasrole
                 <a class="collapse-item" href="{{route('reports.index')}}">Reports List</a>
                 <!-- <a class="collapse-item" href="">Add New</a> -->
             </div>
         </div>
     </li>
 
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+    <div class="sidebar-heading">
+        Operations
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOperations" aria-expanded="true" aria-controls="collapseOperations">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Operations</span>
+        </a>
+        <div id="collapseOperations" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Operations</h6>
+
+                <a class="collapse-item" href="{{route('operations.index')}}">Operations List</a>
+
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+    <div class="sidebar-heading">
+        Requests
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapserequests" aria-expanded="true" aria-controls="collapserequests">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Requests</span>
+        </a>
+        <div id="collapserequests" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Requests</h6>
+
+                <a class="collapse-item" href="{{route('requests.index')}}">Requests List</a>
+
+            </div>
+        </div>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

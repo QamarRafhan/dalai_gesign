@@ -4,23 +4,28 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Fund;
-use App\Models\Report;
 use App\Models\UserRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class RequestController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('role:Admin', ['except' => ['index', 'create', 'store']]);
+    }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $allreqs = UserRequest::with('fund')->orderBy('date', 'DESC')->paginate(10);
+        $query = UserRequest::query();
+        if (!$request->user()->hasRole('Admin')) {
+            $query->where('ID_user', $request->user()->id);
+        }
+        $allreqs = $query->with('fund')->orderBy('date', 'DESC')->paginate(10);
         $funds = Fund::select('id', 'name')->get();
         return view('request.index', ['allreqs' => $allreqs, 'funds' => $funds]);
     }
@@ -28,6 +33,7 @@ class RequestController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function create()

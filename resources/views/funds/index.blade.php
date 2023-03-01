@@ -46,11 +46,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th width="20%">Name</th>
-                            <th width="25%">Source</th>
-                            <th width="15%">Value</th>
-                            <th width="15%">Currency</th>
-                            <th width="15%">Value_Eur</th>
+                            <th width="20%">Fund Name</th>
                             <th width="15%">Operations</th>
                             <th width="15%">Fund Management</th>
                             <th width="15%">Action</th>
@@ -58,13 +54,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($funds as $fund)
+                        @forelse ($funds as $fund)
+
                         <tr>
                             <td>{{ $fund->name }}</td>
-                            <td>{{ $fund->source }}</td>
-                            <td>{{ $fund->value }}</td>
-                            <td>{{ $fund->currency }}</td>
-                            <td>{{$fund->value_eur}}</td>
+
                             <td>
 
                                 <a href="{{route('funds.operations.index',['fund' => $fund->id])}}" class="btn btn-primary m-2">
@@ -74,7 +68,7 @@
                             </td>
                             <td>
 
-                                <a href="{{route('funds.operations.index',['fund' => $fund->id])}}" class="btn btn-primary m-2">
+                                <a href="{{route('funds.fund-management.index',['fund' => $fund->id])}}" class="btn btn-primary m-2">
                                     Management
                                 </a>
 
@@ -85,12 +79,18 @@
                                 <a href="{{route('funds.edit',['fund' => $fund->id])}}" class="btn btn-primary m-2">
                                     <i class="fa fa-pen"></i>
                                 </a>
-                                <a class="btn btn-danger m-2" href="">
+                                <a data-toggle="modal" data-load-url="{{ route('funds.destroy', ['fund' => $fund->id]) }}" data-target="#deleteModal3" href="#" class="btn btn-danger m-2 delete_model">
+
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+
+                            <td colspan="4" class="text-center">Data is Not Found</td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
 
@@ -101,9 +101,21 @@
 
 </div>
 
-
+@include('funds.delete-modal')
 @endsection
 
 @section('scripts')
+
+
+<script>
+    $(document).ready(function() {
+        $('.delete_model').on('click', function(e) {
+            var loadurl = $(this).data('load-url');
+            $('#delete_model_form').attr('action', loadurl);
+
+        });
+
+    });
+</script>
 
 @endsection

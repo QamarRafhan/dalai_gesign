@@ -19,7 +19,7 @@ class FundController extends Controller
     }
     public function create()
     {
-        return view('funds.fundcreate');
+        return view('funds.create');
     }
     public function store(Request $request)
     {
@@ -28,21 +28,19 @@ class FundController extends Controller
         $fname->save();
         return redirect()->route('funds.index')->with('success', 'Fund Created Successfully.');
     }
-    public function edit($id)
+    public function edit(Fund $fund)
     {
-        $funds = FundManagement::findOrFail($id);
-        return view('funds.edit', ['funds' => $funds]);
+        return view('funds.edit', ['fund' => $fund]);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, Fund $fund)
     {
-        $funds = FundManagement::findOrFail($id);
-        $funds->update($request->all());
+        $data = $request->only($fund->getFillable());
+        $fund->fill($data)->save();
         return redirect()->route('funds.index')->with('success', 'Fund Updated Successfully.');
     }
-    public function delete($id)
+    public function destroy(Fund $fund)
     {
-        $funds = FundManagement::findOrFail($id);
-        $funds->delete();
+        $fund->delete();
         return redirect()->route('funds.index')->with('success', 'Fund deleted Successfully.');
     }
 

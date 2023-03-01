@@ -130,15 +130,16 @@
                         <canvas id="myPieChart"></canvas>
                     </div>
                     <div class="mt-4 text-center small">
+                   
+
+                        @foreach ($data['source'] as $key=>$single)
                         <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> Direct
+                            <i class="fas fa-circle {{$key==0 ? 'text-primary': ''}} {{$key==1 ? 'text-success': ''}} {{$key==2 ? 'text-info': ''}}"></i> {{$single}}
                         </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Social
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> Referral
-                        </span>
+                        @endforeach
+
+
+
                     </div>
                 </div>
             </div>
@@ -154,6 +155,15 @@
     <!-- Page level plugins -->
     <script src="{{asset('admin/js/demo/Chart.min.js')}}"></script>
     <script src="{{asset('admin/js/demo/chart-area-demo.js')}}"></script>
+    <script>
+        var source = <?php echo json_encode($data['source']); ?>;
+        var sum = <?php echo json_encode($data['sum']); ?>;
+      
+    </script>
+
+
+
+
     <script src="{{asset('admin/js/demo/chart-pie-demo.js')}}"></script>
 
 

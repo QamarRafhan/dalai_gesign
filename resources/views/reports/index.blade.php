@@ -8,9 +8,13 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Reports</h1>
+        @hasrole('Admin')
         <a href="{{ route('reports.create') }}" class="btn btn-sm btn-primary">
             <i class="fas fa-plus"></i> Add New
         </a>
+ 
+        @endhasrole
+
     </div>
 
     {{-- Alert Messages --}}
