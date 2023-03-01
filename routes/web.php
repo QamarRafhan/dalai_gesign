@@ -8,7 +8,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\FundOperationController;
+use App\Http\Controllers\UserOperationController;
 use App\Http\Controllers\FundManagementController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,23 +31,20 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    // Roles
-    Route::resource('roles', App\Http\Controllers\RolesController::class);
-    // Permissions
-    Route::resource('permissions', App\Http\Controllers\PermissionsController::class);
+    // Profile Routes
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [HomeController::class, 'getProfile'])->name('detail');
+        Route::post('/update', [HomeController::class, 'updateProfile'])->name('update');
+        Route::post('/change-password', [HomeController::class, 'changePassword'])->name('change-password');
+    });
+
+    Route::resource('reports', ReportController::class);
+    Route::resource('requests', RequestController::class);
+    Route::resource('operations', UserOperationController::class);
 });
 
-// Profile Routes
-Route::prefix('profile')->name('profile.')->middleware('auth')->group(function () {
-    Route::get('/', [HomeController::class, 'getProfile'])->name('detail');
-    Route::post('/update', [HomeController::class, 'updateProfile'])->name('update');
-    Route::post('/change-password', [HomeController::class, 'changePassword'])->name('change-password');
-});
-
-
-
-// Users 
-Route::middleware('auth')->prefix('users')->name('users.')->group(function () {
+// Users ['middleware' => ['role:super-admin']
+Route::middleware('auth', 'role:Admin')->prefix('users')->name('users.')->group(function () {
 
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/create', [UserController::class, 'create'])->name('create');
@@ -61,9 +60,7 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function () {
 
     Route::get('export/', [UserController::class, 'export'])->name('export');
 });
-
-
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'role:Admin')->group(function () {
 
     Route::get('/funds/import', [FundController::class, 'importFundmanagment'])->name('fundmanagment');
     Route::post('/funds/store', [FundController::class, 'uploadFundmanagment'])->name('upload_fundmanagment');
@@ -73,16 +70,12 @@ Route::middleware('auth')->group(function () {
         Route::resource('{fund}/operations', FundOperationController::class);
         Route::resource('{fund}/fund-management', FundManagementController::class);
     });
-
-
-    Route::resource('reports', ReportController::class);
-    Route::resource('requests', RequestController::class);
+    // Roles
+    Route::resource('roles', App\Http\Controllers\RolesController::class);
+    // Permissions
+    Route::resource('permissions', App\Http\Controllers\PermissionsController::class);
 });
 
-
-
-
-
-// Route::fallback(function () {
-//     return redirect()->route('login');
-// });
+Route::fallback(function () {
+    return redirect()->route('login');
+});

@@ -51,7 +51,9 @@
                             <th width="15%">Amount EUR</th>
                             <th width="15%">Type</th>
                             <th width="15%">Status</th>
+                            @hasrole("Admin")
                             <th width="15%">Action</th>
+                            @endhasrole
 
                         </tr>
                     </thead>
@@ -64,6 +66,7 @@
                             <td>{{ $allreq->amount_eur }}</td>
                             <td> {{$allreq->operation_type == 1 ? 'In' : 'Out'}}</td>
                             <td> {{$allreq->allStatus[$allreq->status]}}</td>
+                            @hasrole("Admin")
                             <td style="display: flex">
 
                                 <a data-toggle="modal" data-load-url="{{route('requests.edit', ['request' => $allreq->id])}}" data-target="#editReportModal" href="#" class="btn btn-primary m-2">
@@ -75,10 +78,11 @@
                                 </a>
 
                             </td>
+                            @endhasrole
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="text-center">Data is Not Found</td>
+                            <td colspan="10" class="text-center">Data is Not Found</td>
                         </tr>
                         @endforelse
 

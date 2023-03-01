@@ -9,8 +9,8 @@ class UserOperation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_user',
-        'id_fund',
+        'iD_user',
+        'iD_fund',
         'amount',
         'currency',
         'amount_eur',
@@ -21,6 +21,6 @@ class UserOperation extends Model
     ];
     public function user()
     {
-         return $this->belongsTo('App\Models\User','id');
+        return $this->belongsTo('App\Models\User', 'id');
     }
 }

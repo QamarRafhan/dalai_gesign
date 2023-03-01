@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('fund_operations', function (Blueprint $table) {
             $table->id();
+            $table->integer('ID_user')->nullable();
             $table->integer('ID_fund')->nullable();
             $table->dateTime('date')->nullable();
             $table->integer('month')->default(0);

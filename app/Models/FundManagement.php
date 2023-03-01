@@ -14,6 +14,7 @@ class FundManagement extends Model
             "value",
             "currency", 
             "value_eur", 
+            'ID_fund'
     ];    
     public function alloperations()
     {

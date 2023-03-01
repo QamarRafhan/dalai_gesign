@@ -32,7 +32,26 @@ class HomeController extends Controller
     {
 
         $request_opened = UserRequest::where(['ID_user' => $request->user()->id, 'status' => 0])->count();
-        return view('home', ['request_opened' => $request_opened, 'user' => $request->user()]);
+
+
+
+        $graph2_query = DB::table('fund_management')
+            ->select(DB::raw('source, SUM(value_eur) as sum'))
+            ->having('sum', '>', 0)
+            ->groupBy('source')
+            ->get();
+
+        if (count($graph2_query)) {
+            $data['source'] = $graph2_query->pluck('source')->toArray();
+            $data['sum'] =   $graph2_query->pluck('sum')->toArray();
+        } else {
+
+            $data['source'] = [];
+            $data['sum'] = [];
+        }
+
+
+        return view('home', ['data' => $data, 'request_opened' => $request_opened, 'user' => $request->user()]);
     }
 
     /**

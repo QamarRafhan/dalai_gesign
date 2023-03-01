@@ -36,9 +36,15 @@ class FundOperationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Fund $fund)
     {
-        //
+
+        $operation = new FundOperation();
+        $data = $request->only($operation->getFillable());
+        $data['ID_fund'] = $fund->id;
+        $data['ID_user'] = $request->user()->id;
+        $operation->fill($data)->save();
+        return redirect()->route('funds.operations.index', ['fund' => $fund])->with('success', 'Data Updated Successfully.');
     }
 
     /**
@@ -60,8 +66,8 @@ class FundOperationController extends Controller
      */
     public function edit(Fund $fund, FundOperation $operation)
     {
-        
-        return view('funds.operations.edit', ['fund' => $fund,'fundOperation' => $operation]);
+
+        return view('funds.operations.edit', ['fund' => $fund, 'fundOperation' => $operation]);
     }
 
     /**
@@ -71,7 +77,7 @@ class FundOperationController extends Controller
      * @param  FundOperation  $operation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Fund $fund ,FundOperation $operation)
+    public function update(Request $request, Fund $fund, FundOperation $operation)
     {
         $data = $request->only($operation->getFillable());
         $operation->fill($data)->save();
@@ -84,9 +90,9 @@ class FundOperationController extends Controller
      * @param  FundOperation  $operation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, FundOperation $operation)
+    public function destroy(Request $request, Fund $fund, FundOperation $operation)
     {
         $operation->delete();
-        return redirect()->route('requests.index')->with('success', 'Record Removed Successfully.');
+        return redirect()->route('funds.operations.index', ['fund' => $fund])->with('success', 'Record Removed Successfully.');
     }
 }
