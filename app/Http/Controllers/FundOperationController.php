@@ -42,7 +42,7 @@ class FundOperationController extends Controller
         $operation = new FundOperation();
         $data = $request->only($operation->getFillable());
         $data['ID_fund'] = $fund->id;
-        $data['ID_user'] = $request->user()->id;
+        // $data['ID_user'] = $request->user()->id;
         $operation->fill($data)->save();
         return redirect()->route('funds.operations.index', ['fund' => $fund])->with('success', 'Data Updated Successfully.');
     }
