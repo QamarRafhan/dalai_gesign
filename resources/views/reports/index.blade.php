@@ -12,7 +12,7 @@
         <a href="{{ route('reports.create') }}" class="btn btn-sm btn-primary">
             <i class="fas fa-plus"></i> Add New
         </a>
- 
+
         @endhasrole
 
     </div>
@@ -41,7 +41,8 @@
                         <tr>
                             <th width="25%">Name</th>
                             <th width="25%">Source</th>
-                            <th width="50%">Value</th>
+                            <th width="50%">Download</th>
+                            <th>Action</th>
 
 
                         </tr>
@@ -55,6 +56,16 @@
 
 
 
+                            </td>
+                            <td style="display: flex">
+
+                                <a href="{{route('reports.edit',['report' => $report->id])}}" class="btn btn-primary m-2">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                                <a data-toggle="modal" data-load-url="{{ route('reports.destroy', ['report' => $report->id]) }}" data-target="#deleteModal3" href="#" class="btn btn-danger m-2 delete_model">
+
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </td>
 
                         </tr>
@@ -73,9 +84,22 @@
 
 </div>
 
-
+@include('funds.delete-modal')
 @endsection
 
 @section('scripts')
+
+
+<script>
+    $(document).ready(function() {
+        $('.delete_model').on('click', function(e) {
+            console.log('dhfsghafg')
+            var loadurl = $(this).data('load-url');
+            $('#delete_model_form').attr('action', loadurl);
+
+        });
+
+    });
+</script>
 
 @endsection

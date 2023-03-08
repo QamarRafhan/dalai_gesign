@@ -78,6 +78,9 @@ class ReportController extends Controller
     public function edit($id)
     {
         //
+     $report=Report::find($id);
+     return view('reports.edit', ['report' => $report]);
+
     }
 
     /**
@@ -90,6 +93,17 @@ class ReportController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $reportdata = Report::find($id);
+        $data = $request->only($reportdata->getFillable());
+        if ($request->hasFile('report_file')) {
+            $image = $request->file('report_file');
+            $imageName = rand(111111, 9999999) . $image->getClientOriginalName();
+            Storage::putFileAs('public/report_file', $image, $imageName);
+            $data['route'] = $imageName;
+        }
+        $data['date'] = Carbon::now()->format('d-m-Y');
+        $reportdata->fill($data)->save();
+        return redirect()->route('reports.index')->with('success', 'Report updated Successfully.');
     }
 
     /**
@@ -101,5 +115,8 @@ class ReportController extends Controller
     public function destroy($id)
     {
         //
+        $reportdata = Report::find($id);
+        $reportdata->delete();
+        return redirect()->route('reports.index')->with('success', 'Report Data Deleted Successfully.');
     }
 }
